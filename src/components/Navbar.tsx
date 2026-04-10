@@ -13,7 +13,6 @@ export class Navbar extends Newstack {
   ) {
     const t = getT(router.path);
     const prefix = getPrefix(router.path);
-    console.log(router.path, t.nav)
 
     const base = mobile
       ? "font-mono text-base py-3 border-b border-[#262626] hover:text-[#fc51a6] transition-colors duration-200"
@@ -42,7 +41,6 @@ export class Navbar extends Newstack {
   }
 
   render({ router }: NewstackClientContext) {
-    const t = getT(router.path);
     const p = getPrefix(router.path);
 
     return (
