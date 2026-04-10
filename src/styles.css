@@ -29,3 +29,12 @@ code {
 .text-fg-muted {
   color: #adadad;
 }
+
+@keyframes pulse-opacity {
+  from {
+    opacity: 0.04;
+  }
+  to {
+    opacity: 0.10;
+  }
+}
