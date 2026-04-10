@@ -1,6 +1,7 @@
 /* ---------- External ---------- */
 import Newstack, { type NewstackClientContext } from "@moureau/newstack";
 import { Navbar } from "./components/Navbar";
+import { Intro } from "./components/Intro";
 
 export class About extends Newstack {
   /* ---------- Lifecycle ---------- */
@@ -13,23 +14,25 @@ export class About extends Newstack {
   /* ---------- Render Methods ---------- */
   renderIntro() {
     return (
-      <section class="mb-16">
-        <p class="text-lg text-fg-muted leading-relaxed max-w-2xl">
-          Moureau Development is a vertically integrated venture studio that
-          operates as a high-performance bridge between{" "}
-          <span class="text-[#f9f9f9] font-medium">
-            Latin America and Europe
-          </span>
-          . By maintaining a presence in both{" "}
-          <span class="text-[#f9f9f9] font-medium">Brazil and Spain</span>, the
-          studio leverages an international perspective to build "metal-up"
-          technology that bypasses the inefficiencies of the modern web.
-        </p>
-        <p class="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
-          The studio's competitive edge lies in its proprietary, zero-dependency
-          ecosystem, which allows for total architectural sovereignty.
-        </p>
-      </section>
+      <Intro title="About">
+        <section class="mb-16">
+          <p class="text-lg text-fg-muted leading-relaxed max-w-2xl">
+            Moureau Development is a vertically integrated venture studio that
+            operates as a high-performance bridge between{" "}
+            <span class="text-[#f9f9f9] font-medium">
+              Latin America and Europe
+            </span>
+            . By maintaining a presence in both{" "}
+            <span class="text-[#f9f9f9] font-medium">Brazil and Spain</span>, the
+            studio leverages an international perspective to build "metal-up"
+            technology that bypasses the inefficiencies of the modern web.
+          </p>
+          <p class="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
+            The studio's competitive edge lies in its proprietary, zero-dependency
+            ecosystem, which allows for total architectural sovereignty.
+          </p>
+        </section>
+      </Intro>
     );
   }
 
@@ -151,13 +154,6 @@ export class About extends Newstack {
         <Navbar />
 
         <div class="container mx-auto mt-14 px-4">
-          <div class="pt-16 pb-8 motion-safe:animate-fade-in motion-safe:animate-fill-both">
-            <h1 class="font-mono text-4xl sm:text-5xl font-bold mb-4">
-              About
-            </h1>
-            <div class="w-12 h-0.5 bg-[#fc51a6] mb-10" />
-          </div>
-
           {this.renderIntro()}
           {this.renderStack()}
           {this.renderIdentity()}
