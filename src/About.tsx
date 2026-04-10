@@ -1,6 +1,5 @@
 /* ---------- External ---------- */
 import Newstack, { type NewstackClientContext } from "@moureau/newstack";
-import { Navbar } from "./components/Navbar";
 import { Intro } from "./components/Intro";
 
 export class About extends Newstack {
@@ -140,7 +139,7 @@ export class About extends Newstack {
           Moureau Development isn't just a software house; it is a{" "}
           <span class="text-[#f9f9f9] font-medium">technology factory</span>.
           By owning everything from the infrastructure (Basebox) to the
-          framework (Newstack) and the full game engine (Murow), the studio
+          framework (Newstack) and a full game engine (Murow), the studio
           ensures that every product is leaner, faster, and more scalable than
           anything built on standard third-party abstractions.
         </p>
@@ -150,16 +149,12 @@ export class About extends Newstack {
 
   render() {
     return (
-      <main class="bg-[#101010] text-[#f9f9f9] min-h-screen flex flex-col">
-        <Navbar />
-
-        <div class="container mx-auto mt-14 px-4">
-          {this.renderIntro()}
-          {this.renderStack()}
-          {this.renderIdentity()}
-          {this.renderVision()}
-        </div>
-      </main>
+      <div class="container mx-auto mt-14 px-4">
+        {this.renderIntro()}
+        {this.renderStack()}
+        {this.renderIdentity()}
+        {this.renderVision()}
+      </div>
     );
   }
 }

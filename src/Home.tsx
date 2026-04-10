@@ -1,6 +1,5 @@
 /* ---------- External ---------- */
 import Newstack, { type NewstackClientContext } from "@moureau/newstack";
-import { Navbar } from "./components/Navbar";
 
 /**
  * @description
@@ -113,17 +112,13 @@ export class Home extends Newstack {
 
   render() {
     return (
-      <main class="bg-[#101010] text-[#f9f9f9] min-h-screen flex flex-col">
-        <Navbar />
+      <section class="relative container flex flex-col overflow-hidden mx-auto mt-14">
+        <div class="flex-1 flex flex-col items-center justify-center text-center pt-20 pb-4 md:pb-8 lg:pb-12">
+          {this.renderHero()}
+        </div>
 
-        <section class="relative container flex flex-col overflow-hidden mx-auto mt-14">
-          <div class="flex-1 flex flex-col items-center justify-center text-center pt-20 pb-4 md:pb-8 lg:pb-12">
-            {this.renderHero()}
-          </div>
-
-          {this.renderProductList()}
-        </section>
-      </main>
+        {this.renderProductList()}
+      </section>
     );
   }
 }

@@ -2,8 +2,11 @@
 import Newstack from "@moureau/newstack";
 
 /* ---------- Pages ---------- */
+import { Layout } from "./components/Layout";
 import { Home } from "./Home";
 import { About } from "./About";
+import { Blog } from "./Blog";
+import { BlogPost } from "./BlogPost";
 
 /* ---------- Styles ---------- */
 import "./styles.css";
@@ -11,10 +14,12 @@ import "./styles.css";
 export class Application extends Newstack {
   render() {
     return (
-      <div>
+      <Layout>
         <Home route="/" />
         <About route="/about" />
-      </div>
+        <Blog route="/blog" />
+        <BlogPost route="/blog/:slug" />
+      </Layout>
     );
   }
 }
