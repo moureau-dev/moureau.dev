@@ -1,47 +1,89 @@
-export function Navbar() {
-  return (
-    <header class="border-[#262626] sticky top-0 z-50 border-b">
-      <div class="absolute inset-0 bg-bg/80 backdrop-blur-md" />
+/* ---------- External ---------- */
+import Newstack from "@moureau/newstack";
 
-      <nav
-        aria-label="Main"
-        class="relative container min-h-14 flex items-center gap-2 z-1 justify-end mx-auto w-full"
-      >
-        <span class="hidden sm:block w-1" />
-        <a href="/">
-          <b class="font-mono">
-            <span>
-              .<span class="text-[#fc51a6]">/</span>
-            </span>
-            MDEV
-          </b>
+export class Navbar extends Newstack {
+  /* ---------- Proxies ---------- */
+  open = false;
+
+  /* ---------- Render Methods ---------- */
+  renderLinks({ mobile = false }) {
+    const base = mobile
+      ? "font-mono text-base py-3 border-b border-[#262626] hover:text-[#fc51a6] transition-colors duration-200"
+      : "font-mono px-4 text-sm hover:underline";
+
+    return (
+      <div class="flex flex-col sm:contents">
+        <a href="/about" class={base}>
+          about
         </a>
+        <a href="/blog" class={base}>
+          blog
+        </a>
+        <a
+          href="mailto:hello@moureau.dev"
+          class={
+            mobile
+              ? `${base} border-none`
+              : "font-mono text-sm cursor-pointer hover:underline px-4"
+          }
+        >
+          contact
+        </a>
+      </div>
+    );
+  }
 
-        <div class="flex-1 flex items-center md:gap-6 sm:flex justify-end" />
+  render() {
+    return (
+      <header class="border-[#262626] sticky top-0 z-50 border-b">
+        <div class="absolute inset-0 bg-[#101010]/80 backdrop-blur-md" />
 
-        <div class="hidden sm:flex shrink-0 items-center gap-2">
-          <div class="relative flex min-w-28 items-center justify-end">
-            <a href="/about" class="font-mono px-4 text-sm hover:underline">
-              about
-            </a>
-
-            <a href="/blog" class="font-mono px-4 text-sm hover:underline">
-              blog
-            </a>
-
-            <button
-              class="group gap-x-1 items-center justify-center font-mono border border-border rounded-md transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed disabled:border-transparent inline-flex text-sm px-4 py-2 bg-transparent text-fg hover:enabled:bg-fg/10 focus-visible:enabled:bg-fg/10 aria-pressed:bg-fg/10 aria-pressed:border-fg/20 aria-pressed:hover:enabled:bg-fg/20 aria-pressed:hover:enabled:text-fg/50 border-none"
-              type="button"
-              aria-expanded="false"
-              aria-haspopup="true"
-            >
-              <span class="font-mono text-sm cursor-pointer hover:underline">
-                contact
+        <nav
+          aria-label="Main"
+          class="relative container min-h-14 flex items-center gap-2 z-1 mx-auto w-full px-4"
+        >
+          {/* Logo */}
+          <a href="/" class="mr-auto">
+            <b class="font-mono">
+              <span>
+                .<span class="text-[#fc51a6]">/</span>
               </span>
-            </button>
+              MDEV
+            </b>
+          </a>
+
+          {/* Desktop links */}
+          <div class="hidden sm:flex shrink-0 items-center">
+            {this.renderLinks({})}
           </div>
-        </div>
-      </nav>
-    </header>
-  );
+
+          {/* Burger button */}
+          <button
+            type="button"
+            class="sm:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 shrink-0"
+            aria-label="Toggle menu"
+            aria-expanded={this.open ? "true" : "false"}
+            onclick={() => (this.open = !this.open)}
+          >
+            <span
+              class={`block w-5 h-px bg-[#f9f9f9] transition-all duration-200 origin-center ${this.open ? "rotate-45 translate-y-1.75" : ""}`}
+            />
+            <span
+              class={`block w-5 h-px bg-[#f9f9f9] transition-all duration-200 ${this.open ? "opacity-0" : ""}`}
+            />
+            <span
+              class={`block w-5 h-px bg-[#f9f9f9] transition-all duration-200 origin-center ${this.open ? "-rotate-45 -translate-y-1.75" : ""}`}
+            />
+          </button>
+        </nav>
+
+        {/* Mobile drawer */}
+        {this.open && (
+          <div class="sm:hidden relative z-40 border-t border-[#262626] bg-[#101010] px-4 flex flex-col py-2">
+            {this.renderLinks({ mobile: true })}
+          </div>
+        )}
+      </header>
+    );
+  }
 }
