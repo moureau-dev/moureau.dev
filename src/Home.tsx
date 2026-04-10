@@ -1,5 +1,7 @@
 /* ---------- External ---------- */
 import Newstack, { type NewstackClientContext } from "@moureau/newstack";
+import { getT } from "./i18n/detect";
+import type { Translations } from "./i18n";
 
 /**
  * @description
@@ -11,9 +13,10 @@ export class Home extends Newstack {
   count = 0;
 
   /* ---------- Lifecycle ---------- */
-  prepare({ page }: NewstackClientContext) {
-    page.title = "Moureau Development";
-    page.description = "Welcome to Newstack";
+  prepare({ page, router }: NewstackClientContext) {
+    const t = getT(router.path);
+    page.title = t.meta.home.title;
+    page.description = t.meta.home.description;
   }
 
   renderProductList() {
@@ -46,7 +49,9 @@ export class Home extends Newstack {
     );
   }
 
-  renderHero() {
+  renderHero({ router }: Partial<NewstackClientContext>) {
+    const t = getT(router.path);
+
     return (
       <div class="flex flex-col items-center">
         <div class="font-mono text-5xl lg:text-7xl uppercase relative mb-4">
@@ -63,7 +68,7 @@ export class Home extends Newstack {
         </div>
 
         <p class="text-fg-muted md:text-lg sm:text-xl max-w-sm md:max-w-xl mb-4 lg:mb-8 motion-safe:animate-slide-up motion-safe:animate-fill-both delay-100">
-          a fast-moving, modern tech & venture studio.
+          {t.home.subtitle}
         </p>
 
         <div class="flex items-center gap-3 mb-12 lg:mb-14">
@@ -110,11 +115,11 @@ export class Home extends Newstack {
     );
   }
 
-  render() {
+  render({ router }: NewstackClientContext) {
     return (
       <section class="relative container flex flex-col overflow-hidden mx-auto mt-14">
         <div class="flex-1 flex flex-col items-center justify-center text-center pt-20 pb-4 md:pb-8 lg:pb-12">
-          {this.renderHero()}
+          {this.renderHero({})}
         </div>
 
         {this.renderProductList()}

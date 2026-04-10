@@ -1,72 +1,54 @@
 /* ---------- External ---------- */
 import Newstack, { type NewstackClientContext } from "@moureau/newstack";
 import { Intro } from "./components/Intro";
+import { getT } from "./i18n/detect";
+import type { Translations } from "./i18n";
 
 export class About extends Newstack {
   /* ---------- Lifecycle ---------- */
-  prepare({ page }: NewstackClientContext) {
-    page.title = "About — Moureau Development";
-    page.description =
-      "Moureau Development is a vertically integrated venture studio bridging Latin America and Europe.";
+  prepare({ page, router }: NewstackClientContext) {
+    const t = getT(router.path);
+    page.title = t.meta.about.title;
+    page.description = t.meta.about.description;
   }
 
   /* ---------- Render Methods ---------- */
-  renderIntro() {
+  renderIntro({ router }: Partial<NewstackClientContext>) {
+    const t = getT(router.path);
+    const { intro } = t.about;
+
     return (
-      <Intro title="About">
+      <Intro title={t.nav.about}>
         <section class="mb-16">
           <p class="text-lg text-fg-muted leading-relaxed max-w-2xl">
-            Moureau Development is a vertically integrated venture studio that
-            operates as a high-performance bridge between{" "}
-            <span class="text-[#f9f9f9] font-medium">
-              Latin America and Europe
-            </span>
-            . By maintaining a presence in both{" "}
-            <span class="text-[#f9f9f9] font-medium">Brazil and Spain</span>, the
-            studio leverages an international perspective to build "metal-up"
-            technology that bypasses the inefficiencies of the modern web.
+            {intro.text1}
+            <span class="text-[#f9f9f9] font-medium">{intro.highlight1}</span>
+            {intro.text2}
+            <span class="text-[#f9f9f9] font-medium">{intro.highlight2}</span>
+            {intro.text3}
           </p>
           <p class="mt-4 text-lg text-fg-muted leading-relaxed max-w-2xl">
-            The studio's competitive edge lies in its proprietary, zero-dependency
-            ecosystem, which allows for total architectural sovereignty.
+            {intro.p2}
           </p>
         </section>
       </Intro>
     );
   }
 
-  renderStack() {
+  renderStack({ router }: Partial<NewstackClientContext>) {
+    const t = getT(router.path);
+    const { stack } = t.about;
     const products = [
-      {
-        name: "Basebox",
-        tag: "Infrastructure Layer",
-        description:
-          'The studio\'s unified backbone. It provides the essential "plumbing" for every project—including authentication, multi-tenant organization management, payment integration, and static asset hosting—ensuring that every product starts on a production-ready foundation.',
-      },
-      {
-        name: "Newstack",
-        tag: "Web Framework",
-        description:
-          "An isomorphic, zero-dependency framework designed to eliminate the overhead of traditional virtual DOMs. By using proxy-based reactivity, it achieves 100ms build times and supports SPA, SSG, and SSR, prioritizing extreme speed and developer control.",
-      },
-      {
-        name: "Murow",
-        tag: "Multiplayer Engine",
-        description:
-          "A server-authoritative engine built for real-time synchronization. It uses ECS and WebGPU to handle high-concurrency multiplayer environments, treating performance as a core feature rather than an afterthought.",
-      },
-      {
-        name: "Broto",
-        tag: "The Generator",
-        description:
-          "A SaaS deployment engine that utilizes Basebox and Newstack to transform an idea into a deployed application in under 15 minutes.",
-      },
+      { name: "Basebox", ...stack.basebox },
+      { name: "Newstack", ...stack.newstack },
+      { name: "Murow", ...stack.murow },
+      { name: "Broto", ...stack.broto },
     ];
 
     return (
       <section class="mb-16">
         <h2 class="font-mono text-xs uppercase tracking-widest text-[#fc51a6] mb-6">
-          The Proprietary Stack
+          {stack.title}
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {products.map((p) => (
@@ -85,32 +67,22 @@ export class About extends Newstack {
     );
   }
 
-  renderIdentity() {
+  renderIdentity({ router }: Partial<NewstackClientContext>) {
+    const t = getT(router.path);
+    const { identity } = t.about;
     const pillars = [
-      {
-        label: "Technical Purism",
-        description:
-          'Rejecting "web bloat" in favor of custom-built tools in Zig, Go, and TypeScript.',
-      },
-      {
-        label: "Rapid Commercialization",
-        description:
-          "Using the internal stack (Newstack + Basebox) to drastically reduce time-to-market for new ventures.",
-      },
-      {
-        label: "Specialized Consultancy",
-        description:
-          "Offering high-level architectural services to clients who require multiplayer expertise or low-level performance optimization.",
-      },
+      identity.techPurism,
+      identity.commercialization,
+      identity.consultancy,
     ];
 
     return (
       <section class="mb-16">
         <h2 class="font-mono text-xs uppercase tracking-widest text-[#fc51a6] mb-2">
-          Strategic Identity
+          {identity.title}
         </h2>
         <p class="text-fg-muted text-sm font-mono mb-6">
-          Brazil–Spain Corridor · Curitiba × Madrid
+          {identity.subtitle}
         </p>
         <ul class="flex flex-col gap-4 list-none m-0 p-0">
           {pillars.map((p) => (
@@ -129,19 +101,19 @@ export class About extends Newstack {
     );
   }
 
-  renderVision() {
+  renderVision({ router }: Partial<NewstackClientContext>) {
+    const t = getT(router.path);
+    const { vision } = t.about;
+
     return (
       <section class="border-t border-[#262626] pt-10 pb-24">
         <h2 class="font-mono text-xs uppercase tracking-widest text-[#fc51a6] mb-4">
-          The Vision
+          {vision.title}
         </h2>
         <p class="text-fg-muted leading-relaxed max-w-2xl">
-          Moureau Development isn't just a software house; it is a{" "}
-          <span class="text-[#f9f9f9] font-medium">technology factory</span>.
-          By owning everything from the infrastructure (Basebox) to the
-          framework (Newstack) and a full game engine (Murow), the studio
-          ensures that every product is leaner, faster, and more scalable than
-          anything built on standard third-party abstractions.
+          {vision.text1}
+          <span class="text-[#f9f9f9] font-medium">{vision.highlight}</span>
+          {vision.text2}
         </p>
       </section>
     );
@@ -150,10 +122,10 @@ export class About extends Newstack {
   render() {
     return (
       <div class="container mx-auto mt-14 px-4">
-        {this.renderIntro()}
-        {this.renderStack()}
-        {this.renderIdentity()}
-        {this.renderVision()}
+        {this.renderIntro({})}
+        {this.renderStack({})}
+        {this.renderIdentity({})}
+        {this.renderVision({})}
       </div>
     );
   }

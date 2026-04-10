@@ -1,6 +1,8 @@
 /* ---------- External ---------- */
 import Newstack, { NewstackServerContext, type NewstackClientContext } from "@moureau/newstack";
 import { Intro } from "./components/Intro";
+import { getT, getPrefix, getLang } from "./i18n/detect";
+import type { Lang } from "./i18n";
 
 /* ---------- Types ---------- */
 interface PostMeta {
@@ -13,6 +15,8 @@ interface PostMeta {
 export class Blog extends Newstack {
   /* ---------- Proxies ---------- */
   posts: PostMeta[] = [];
+  lang: Lang = "en";
+  prefix = "";
 
   /* ---------- Server Functions ---------- */
   static async GetPosts({ deps }) {
@@ -20,10 +24,12 @@ export class Blog extends Newstack {
   }
 
   /* ---------- Lifecycle ---------- */
-  async prepare({ page, environment, deps }: NewstackClientContext & NewstackServerContext) {
-    page.title = "Blog — Moureau Development";
-    page.description =
-      "Thoughts on technology, architecture, and building from the ground up.";
+  async prepare({ page, router, environment, deps }: NewstackClientContext & NewstackServerContext) {
+    const t = getT(router.path);
+    this.lang = getLang(router.path);
+    this.prefix = getPrefix(router.path);
+    page.title = t.meta.blog.title;
+    page.description = t.meta.blog.description;
 
     if (environment === "server") {
       this.posts = await deps.getPosts();
@@ -34,16 +40,13 @@ export class Blog extends Newstack {
   }
 
   renderIntro() {
+    const t = getT(`/${this.lang}`);
+
     return (
       <Intro title="Blog">
         <section class="mb-16">
           <p class="text-lg text-fg-muted leading-relaxed max-w-2xl">
-            Notes on building from the ground up — architecture decisions,
-            lessons from the stack, and the thinking behind{" "}
-            <span class="text-[#f9f9f9] font-medium">
-              owning every layer
-            </span>
-            .
+            {t.blog.intro}
           </p>
         </section>
       </Intro>
@@ -60,7 +63,7 @@ export class Blog extends Newstack {
           {this.posts.map((post) => (
             <li>
               <a
-                href={`/blog/${post.slug}`}
+                href={`${this.prefix}/blog/${post.slug}`}
                 class="group block border border-[#262626] rounded-lg p-6 hover:border-[#fc51a6]/30 transition-colors duration-200"
               >
                 <span class="font-mono text-xs text-[#fc51a6] mb-2 block">

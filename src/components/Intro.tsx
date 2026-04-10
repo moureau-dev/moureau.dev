@@ -4,7 +4,7 @@ export function Intro({ title, children }: { title: string, children?: NewstackN
     return (
         <div class="flex flex-col">
             <div class="pt-16 pb-8 motion-safe:animate-fade-in motion-safe:animate-fill-both">
-                <h1 class="font-mono text-4xl sm:text-5xl font-bold mb-4">
+                <h1 class="font-mono text-4xl sm:text-5xl font-bold mb-4 first-letter:capitalize">
                     {title}
                 </h1>
                 <div class="w-12 h-0.5 bg-[#fc51a6] mb-2" />

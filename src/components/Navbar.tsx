@@ -1,23 +1,31 @@
 /* ---------- External ---------- */
-import Newstack from "@moureau/newstack";
+import Newstack, { type NewstackClientContext } from "@moureau/newstack";
+import { getT, getPrefix } from "../i18n/detect";
+import type { Translations } from "../i18n";
 
 export class Navbar extends Newstack {
   /* ---------- Proxies ---------- */
   open = false;
 
   /* ---------- Render Methods ---------- */
-  renderLinks({ mobile = false }) {
+  renderLinks(
+    { router, mobile }: Partial<NewstackClientContext<{ mobile: boolean }>>,
+  ) {
+    const t = getT(router.path);
+    const prefix = getPrefix(router.path);
+    console.log(router.path, t.nav)
+
     const base = mobile
       ? "font-mono text-base py-3 border-b border-[#262626] hover:text-[#fc51a6] transition-colors duration-200"
       : "font-mono px-4 text-sm hover:underline";
 
     return (
       <div class="flex flex-col sm:contents">
-        <a href="/about" class={base}>
-          about
+        <a href={`${prefix}/about`} class={base}>
+          {t.nav.about}
         </a>
-        <a href="/blog" class={base}>
-          blog
+        <a href={`${prefix}/blog`} class={base}>
+          {t.nav.blog}
         </a>
         <a
           href="mailto:hello@moureau.dev"
@@ -27,13 +35,16 @@ export class Navbar extends Newstack {
               : "font-mono text-sm cursor-pointer hover:underline px-4"
           }
         >
-          contact
+          {t.nav.contact}
         </a>
       </div>
     );
   }
 
-  render() {
+  render({ router }: NewstackClientContext) {
+    const t = getT(router.path);
+    const p = getPrefix(router.path);
+
     return (
       <header class="border-[#262626] sticky top-0 z-50 border-b">
         <div class="absolute inset-0 bg-[#101010]/80 backdrop-blur-md" />
@@ -43,7 +54,7 @@ export class Navbar extends Newstack {
           class="relative container min-h-14 flex items-center gap-2 z-1 mx-auto w-full px-4"
         >
           {/* Logo */}
-          <a href="/" class="mr-auto">
+          <a href={p ? `${p}/` : "/"} class="mr-auto">
             <b class="font-mono">
               <span>
                 .<span class="text-[#fc51a6]">/</span>

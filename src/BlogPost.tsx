@@ -1,6 +1,7 @@
 /* ---------- External ---------- */
 import Newstack, { NewstackServerContext, type NewstackClientContext } from "@moureau/newstack";
 import { marked } from "marked";
+import { getT, getPrefix, getLang } from "./i18n/detect";
 import "./prose.css";
 
 /* ---------- Helpers ---------- */
@@ -27,6 +28,7 @@ export class BlogPost extends Newstack {
   date = "";
   content = "";
   notFound = false;
+  prefix = "";
 
   /* ---------- Server Functions ---------- */
   static async GetPost({ slug, deps }) {
@@ -34,9 +36,10 @@ export class BlogPost extends Newstack {
   }
 
   /* ---------- Lifecycle ---------- */
-  async prepare({ page, params, deps, environment, fingerprint }: NewstackClientContext & NewstackServerContext) {
+  async prepare({ page, params, router, deps, environment, fingerprint }: NewstackClientContext & NewstackServerContext) {
     const { slug } = params;
     this.notFound = false;
+    this.prefix = getPrefix(router.path);
 
     let raw: string;
     try {
@@ -65,14 +68,16 @@ export class BlogPost extends Newstack {
 
   /* ---------- Render Methods ---------- */
   renderNotFound() {
+    const t = getT(`${this.prefix}/`);
+
     return (
       <div class="container mx-auto mt-14 px-4 pt-24 pb-24 text-center">
-        <p class="font-mono text-fg-muted mb-4">Post not found.</p>
+        <p class="font-mono text-fg-muted mb-4">{t.blog.notFound}</p>
         <a
-          href="/blog"
+          href={`${this.prefix}/blog`}
           class="font-mono text-sm text-[#fc51a6] hover:underline"
         >
-          ← back to blog
+          {t.blog.backToBlog}
         </a>
       </div>
     );
@@ -85,10 +90,10 @@ export class BlogPost extends Newstack {
       <div class="container mx-auto md:mt-10 px-4">
         <div class="md:pt-8 pb-8 motion-safe:animate-fade-in motion-safe:animate-fill-both">
           <a
-            href="/blog"
+            href={`${this.prefix}/blog`}
             class="font-mono text-xs text-fg-muted hover:text-[#fc51a6] transition-colors duration-200 mb-8 inline-block"
           >
-            ← blog
+            {getT(`${this.prefix}/`).blog.backToBlog}
           </a>
           <h1 class="font-mono text-3xl sm:text-4xl font-bold mb-3">
             {this.title}
