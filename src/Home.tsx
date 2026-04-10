@@ -29,8 +29,8 @@ export class Home extends Newstack {
     ];
 
     return (
-      <nav class="pt-4 pb-36 sm:pb-40 text-center motion-safe:animate-fade-in motion-safe:animate-fill-both max-w-lg mx-auto">
-        <ul class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 list-none m-0 p-0">
+      <nav class="pt-2 pb-16 md:pt-4 md:pb-36 text-center motion-safe:animate-fade-in motion-safe:animate-fill-both max-w-lg mx-auto">
+        <ul class="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-6 gap-y-3 list-none m-0 p-0">
           {products.map((p) => (
             <li>
               <a
@@ -50,7 +50,7 @@ export class Home extends Newstack {
   renderHero() {
     return (
       <div class="flex flex-col items-center">
-        <div class="font-mono text-7xl uppercase relative mb-4">
+        <div class="font-mono text-5xl lg:text-7xl uppercase relative mb-4">
           <div class="font-medium">
             <span class="font-light text-[90%] align-top">
               .<span class="text-[#fc51a6]">/</span>
@@ -58,12 +58,12 @@ export class Home extends Newstack {
             Moureau
           </div>
 
-          <sub class="absolute text-lg font-bold text-center -bottom-4 right-0 text-[#fc51a6]">
+          <sub class="absolute text-sm lg:text-lg font-bold text-center -bottom-4 right-0 text-[#fc51a6]">
             Development
           </sub>
         </div>
 
-        <p class="text-fg-muted text-lg sm:text-xl max-w-xl mb-4 lg:mb-8 motion-safe:animate-slide-up motion-safe:animate-fill-both delay-100">
+        <p class="text-fg-muted md:text-lg sm:text-xl max-w-sm md:max-w-xl mb-4 lg:mb-8 motion-safe:animate-slide-up motion-safe:animate-fill-both delay-100">
           a fast-moving, modern tech & venture studio.
         </p>
 
