@@ -1,0 +1,14 @@
+{
+  "name": "moureau",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "start": "newstack start",
+    "build": "newstack build"
+  },
+  "dependencies": {
+    "@moureau/newstack": "latest",
+    "tailwindcss": "^4",
+    "esbuild-plugin-tailwindcss": "^2"
+  }
+}
