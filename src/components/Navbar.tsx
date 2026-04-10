@@ -1,13 +1,46 @@
 /* ---------- External ---------- */
 import Newstack, { type NewstackClientContext } from "@moureau/newstack";
-import { getT, getPrefix } from "../i18n/detect";
-import type { Translations } from "../i18n";
+import { getT, getPrefix, getLang, switchLang } from "../i18n/detect";
+import { SUPPORTED_LANGS, type Lang } from "../i18n";
+
+const ALL_LANGS: Lang[] = ["en", ...SUPPORTED_LANGS];
+
+const LANG_LABELS: Record<Lang, string> = {
+  en: "EN",
+  "es-ES": "ES",
+};
 
 export class Navbar extends Newstack {
   /* ---------- Proxies ---------- */
   open = false;
 
   /* ---------- Render Methods ---------- */
+  renderLangSwitcher(path: string, mobile = false) {
+    const currentLang = getLang(path);
+
+    return (
+      <div class={mobile ? "flex gap-3 py-3" : "flex gap-1 items-center pl-3"}>
+        {ALL_LANGS.map((lang) => {
+          const active = lang === currentLang;
+          const href = switchLang(path, lang);
+          return (
+            <a
+              href={href}
+              class={`font-mono text-xs transition-colors duration-200 ${
+                active
+                  ? "text-[#fc51a6] pointer-events-none"
+                  : "text-fg-muted hover:text-[#f9f9f9]"
+              }`}
+              aria-current={active ? "true" : undefined}
+            >
+              {LANG_LABELS[lang]}
+            </a>
+          );
+        })}
+      </div>
+    );
+  }
+
   renderLinks(
     { router, mobile }: Partial<NewstackClientContext<{ mobile: boolean }>>,
   ) {
@@ -38,6 +71,8 @@ export class Navbar extends Newstack {
         >
           {t.nav.contact}
         </a>
+
+        {mobile && this.renderLangSwitcher(router.path, true)}
       </div>
     );
   }
@@ -63,9 +98,10 @@ export class Navbar extends Newstack {
             </b>
           </a>
 
-          {/* Desktop links */}
+          {/* Desktop links + lang switcher */}
           <div class="hidden sm:flex shrink-0 items-center">
             {this.renderLinks({})}
+            {this.renderLangSwitcher(router.path)}
           </div>
 
           {/* Burger button */}
@@ -89,11 +125,9 @@ export class Navbar extends Newstack {
         </nav>
 
         {/* Mobile drawer */}
-        {this.open && (
-          <div class="sm:hidden relative z-40 border-t border-[#262626] bg-[#101010] px-4 flex flex-col py-2">
-            {this.renderLinks({ mobile: true })}
-          </div>
-        )}
+        <div style={this.open ? "display: flex" : "display: none"} class="sm:hidden relative z-40 border-t border-[#262626] bg-[#101010] px-4 flex flex-col py-2">
+          {this.renderLinks({ mobile: true })}
+        </div>
       </header>
     );
   }

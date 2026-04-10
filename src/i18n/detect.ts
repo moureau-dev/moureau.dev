@@ -22,3 +22,12 @@ export function getPrefix(path: string): string {
   const lang = getLang(path);
   return lang === "en" ? "" : `/${lang}`;
 }
+
+/** Returns the equivalent path in the target language. */
+export function switchLang(path: string, targetLang: Lang): string {
+  const currentLang = getLang(path);
+  const currentPrefix = currentLang === "en" ? "" : `/${currentLang}`;
+  const targetPrefix = targetLang === "en" ? "" : `/${targetLang}`;
+  const rest = currentPrefix ? path.slice(currentPrefix.length) : path;
+  return targetPrefix + (rest || "/");
+}
