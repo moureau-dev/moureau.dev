@@ -23,9 +23,11 @@ export class Navbar extends Newstack {
         <a href={`${prefix}/about`} class={base}>
           {t.nav.about}
         </a>
+
         <a href={`${prefix}/blog`} class={base}>
           {t.nav.blog}
         </a>
+
         <a
           href="mailto:hello@moureau.dev"
           class={

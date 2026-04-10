@@ -87,7 +87,7 @@ export class BlogPost extends Newstack {
     if (this.notFound) return this.renderNotFound();
 
     return (
-      <div class="container mx-auto md:mt-10 px-4">
+      <div class="container mx-auto md:mt-8 px-4">
         <div class="md:pt-8 pb-8 motion-safe:animate-fade-in motion-safe:animate-fill-both">
           <a
             href={`${this.prefix}/blog`}

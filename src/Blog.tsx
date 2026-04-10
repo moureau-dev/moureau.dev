@@ -56,7 +56,7 @@ export class Blog extends Newstack {
   /* ---------- Render Methods ---------- */
   render() {
     return (
-      <div class="container mx-auto md:mt-14 px-4">
+      <div class="container mx-auto md:mt-8 px-4">
         {this.renderIntro()}
 
         <ul class="flex flex-col gap-4 list-none m-0 p-0 pb-24 max-w-2xl">

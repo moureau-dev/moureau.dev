@@ -1,7 +1,8 @@
 /* ---------- External ---------- */
 import Newstack from "@moureau/newstack";
-import { Navbar } from "./components/Navbar";
-import { Footer } from "./components/Footer";
+
+/* ---------- Components ---------- */
+import { Layout } from "./components/Layout";
 
 /* ---------- Pages ---------- */
 import { Home } from "./Home";
@@ -11,7 +12,6 @@ import { BlogPost } from "./BlogPost";
 
 /* ---------- Styles ---------- */
 import "./styles.css";
-import { Layout } from "./components/Layout";
 
 export class Application extends Newstack {
   render() {

@@ -121,7 +121,7 @@ export class About extends Newstack {
 
   render() {
     return (
-      <div class="container mx-auto mt-14 px-4">
+      <div class="container mx-auto md:mt-8 px-4">
         {this.renderIntro({})}
         {this.renderStack({})}
         {this.renderIdentity({})}
