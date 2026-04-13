@@ -63,7 +63,8 @@ export class BlogPost extends Newstack {
     this.date = data.date ?? "";
     this.content = await marked(body);
     page.title = `${this.title} — Moureau Development`;
-    page.description = data.excerpt ?? "";
+    if (data.excerpt) page.description = data.excerpt;
+    if (data.image) page.image = data.image;
   }
 
   /* ---------- Render Methods ---------- */
