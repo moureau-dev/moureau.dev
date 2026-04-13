@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "newstack start",
-    "build": "newstack build"
+    "build": "newstack build --mode=ssg"
   },
   "dependencies": {
     "@moureau/newstack": "latest",
