@@ -88,7 +88,7 @@ export class BlogPost extends Newstack {
 
     return (
       <div class="container mx-auto md:mt-8 px-4">
-        <div class="md:pt-8 pb-8 motion-safe:animate-fade-in motion-safe:animate-fill-both">
+        <div class="md:pt-8 motion-safe:animate-fade-in motion-safe:animate-fill-both">
           <a
             href={`${this.prefix}/blog`}
             class="font-mono text-xs text-fg-muted hover:text-[#fc51a6] transition-colors duration-200 mb-8 inline-block"
