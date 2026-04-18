@@ -7,7 +7,7 @@ import { getLang } from "../i18n/detect";
  * Adds twitter and page locale (reacts to router path changes).
  */
 export class Head extends Newstack {
-    render({ page, router, fingerprint }: NewstackClientContext) {
+    render({ page, router }: NewstackClientContext) {
         page.locale = getLang(router.path);
 
         return (
@@ -15,7 +15,6 @@ export class Head extends Newstack {
                 <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg" />
                 <meta name="twitter:site" content="@luizmoureau" />
                 <meta name="twitter:creator" content="@luizmoureau" />
-                <link rel="manifest" href={`/site.webmanifest`} />
             </head>
         )
     }
