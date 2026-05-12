@@ -24,6 +24,44 @@ export const esEs: Translations = {
   },
   home: {
     subtitle: "un estudio de tecnología y ventures ágil y moderno.",
+    toolings: {
+      label: "herramientas",
+      title: "El Stack Propietario",
+      newstack: {
+        tag: "Framework Web",
+        description:
+          "Un framework full-stack donde el código del servidor y del cliente viven en la misma clase de componente, sin capa de API que definir o mantener por separado. La reactividad basada en proxies actualiza la UI automáticamente, los métodos estáticos asíncronos se convierten en endpoints RPC en tiempo de compilación, y la prop bind={} conecta los inputs al estado en ese mismo paso. Soporta SSR, SPA y SSG desde el mismo código, con service workers, manifiestos PWA y fingerprinting de assets incluidos. Cada producto del estudio corre sobre él, incluido este sitio. Una re-lectura directa de Nullstack, reconstruida solo con ESBuild y Hono.",
+      },
+      basebox: {
+        tag: "Infraestructura",
+        description:
+          "El BaaS interno que impulsa todo lo que lanza el estudio. Cada producto sobre él obtiene gestión multi-tenant, autenticación OAuth y por sesión, procesamiento de suscripciones y pagos, almacenamiento con CDN y componentes UI inyectables desde el primer día. Contabilly, Entregou.ai, Broto y las apps que genera corren como tenants compartiendo la misma capa de auth, los mismos rieles de pago y el mismo almacenamiento, sin reimplementar nada por proyecto.",
+      },
+      murow: {
+        tag: "Motor Multijugador",
+        description:
+          "Un motor de juego TypeScript open-source que toma el multijugador en serio desde cero. El renderer corre sobre WebGPU y cubre 2D y 3D, con carga de glTF, animación esquelética con crossfading y cómputo GPU para física sin copia en memoria. El networking es agnóstico al transporte y se basa en codificación delta binaria de snapshots, predicción del lado del cliente y un sistema RPC e intent con tipos seguros. Incluye también un ECS con almacenamiento SoA y consultas bitmask, pathfinding NavMesh con obstáculos dinámicos y un game loop determinista de tasa fija. Cada hot path es zero-allocation por diseño, manteniendo los tiempos de frame consistentes con cualquier cantidad de jugadores.",
+      },
+    },
+    products: {
+      label: "productos",
+      title: "Ventures",
+      broto: {
+        tag: "IA",
+        description:
+          "Envía una idea y obtén un SaaS en vivo con autenticación, pagos, panel de administración, back-end personalizado, landing page y una app lista para producción en menos de 15 minutos. La IA se encarga de todo hasta el deployment. Y conservas el 100% de todos los ingresos que genera tu app.",
+      },
+      entregou: {
+        tag: "Logística",
+        description:
+          "Crea una tienda online sin configuración, sin contrato y sin tarifa de implementación. Rápida, colaborativa, multi-tienda, con roles, cupones y pagos integrados. Presentada en WebSummit Rio 2025, donde atrajo la atención de medios locales e inversores de capital de riesgo.",
+      },
+      contabilly: {
+        tag: "Finanzas",
+        description:
+          "Plataforma de contabilidad digital para desarrolladores que trabajan en el exterior y en Brasil. Un equipo dedicado gestiona tus facturas, guías de pago y cumplimiento fiscal, con la plataforma automatizando lo que normalmente implica ir y venir manualmente con un contador.",
+      },
+    },
   },
   about: {
     intro: {

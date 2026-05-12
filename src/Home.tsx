@@ -22,6 +22,160 @@ export class Home extends Newstack {
     page.description = t.meta.home.description;
   }
 
+  renderToolings(t: Translations) {
+    const tools = [
+      {
+        id: "newstack",
+        name: "newstack",
+        num: "01",
+        github: "moureau-dev/newstack",
+        ...t.home.toolings.newstack,
+      },
+      {
+        id: "basebox",
+        name: "basebox",
+        num: "02",
+        github: null,
+        ...t.home.toolings.basebox,
+      },
+      {
+        id: "murow",
+        name: "murow",
+        num: "03",
+        github: "moureau-dev/murow",
+        ...t.home.toolings.murow,
+      },
+    ];
+
+    return (
+      <section class="py-16 md:py-24 border-t border-white/6">
+        <header class="mb-10 md:mb-14">
+          <p class="font-mono text-xs text-[#fc51a6] uppercase tracking-widest mb-3">
+            {t.home.toolings.label}
+          </p>
+          <h2 class="font-mono text-2xl md:text-3xl lg:text-4xl font-medium">
+            {t.home.toolings.title}
+          </h2>
+        </header>
+
+        <div class="flex flex-col">
+          {tools.map((tool) => (
+            <div
+              id={tool.id}
+              class="group border-b border-white/6 py-8 md:py-12 flex flex-col md:flex-row md:items-start gap-5 md:gap-16 hover:bg-[#fc51a6]/1.5 -mx-4 md:-mx-8 px-4 md:px-8 transition-colors duration-500"
+            >
+              <div class="md:w-52 shrink-0">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="font-mono text-xs text-white/20">{tool.num}</span>
+                  <p class="font-mono text-xs text-[#fc51a6]/60 uppercase tracking-widest">
+                    {tool.tag}
+                  </p>
+                </div>
+                <h3 class="font-mono text-2xl md:text-3xl font-medium group-hover:text-[#fc51a6] transition-colors duration-300 mb-3">
+                  {tool.name}
+                </h3>
+                {tool.github && (
+                  <a
+                    href={`https://github.com/${tool.github}`}
+                    target="_blank"
+                    class="inline-flex items-center gap-1 font-mono text-xs text-white/25 hover:text-[#fc51a6] transition-colors duration-200"
+                  >
+                    ↗ github
+                  </a>
+                )}
+              </div>
+
+              <p class="text-[#adadad] text-sm md:text-base leading-relaxed md:pt-1 flex-1 max-w-xl">
+                {tool.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
+  renderProducts(t: Translations) {
+    const products = [
+      {
+        id: "broto",
+        name: "broto",
+        live: true,
+        github: null,
+        ...t.home.products.broto,
+      },
+      {
+        id: "entregou.ai",
+        name: "entregou.ai",
+        live: true,
+        github: null,
+        ...t.home.products.entregou,
+      },
+      {
+        id: "contabilly",
+        name: "contabilly",
+        live: true,
+        github: null,
+        ...t.home.products.contabilly,
+      },
+    ];
+
+    return (
+      <section class="py-16 md:py-24 border-t border-white/6">
+        <header class="mb-10 md:mb-14">
+          <p class="font-mono text-xs text-[#fc51a6] uppercase tracking-widest mb-3">
+            {t.home.products.label}
+          </p>
+          <h2 class="font-mono text-2xl md:text-3xl lg:text-4xl font-medium">
+            {t.home.products.title}
+          </h2>
+        </header>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          {products.map((p) => (
+            <div
+              id={p.id}
+              class="group relative border border-white/[0.07] rounded-2xl p-6 md:p-8 hover:border-[#fc51a6]/35 transition-all duration-500 hover:bg-[#fc51a6]/2.5 flex flex-col"
+            >
+              <div class="flex items-center justify-between mb-5">
+                <p class="font-mono text-xs text-[#fc51a6]/60 uppercase tracking-widest">
+                  {p.tag}
+                </p>
+
+                {p.live ? (
+                  <span class="font-mono text-[10px] px-2.5 py-1 rounded-full border border-emerald-500/30 text-emerald-400 bg-emerald-500/10">
+                    live
+                  </span>
+                ) : (
+                  <span class="font-mono text-[10px] px-2.5 py-1 rounded-full border border-white/10 text-white/25 bg-white/4">
+                    soon
+                  </span>
+                )}
+              </div>
+
+              <h3 class="font-mono text-xl md:text-2xl font-medium mb-4 group-hover:text-[#fc51a6] transition-colors duration-300">
+                {p.name}
+              </h3>
+              <p class="text-[#adadad] text-sm md:text-base leading-relaxed flex-1">
+                {p.description}
+              </p>
+
+              {p.github && (
+                <a
+                  href={`https://github.com/${p.github}`}
+                  target="_blank"
+                  class="inline-flex items-center gap-1 font-mono text-xs text-white/25 hover:text-[#fc51a6] transition-colors duration-200 mt-5"
+                >
+                  ↗ github
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   renderProductList() {
     const products = [
       "broto",
@@ -98,13 +252,18 @@ export class Home extends Newstack {
   }
 
   render({ router }: NewstackClientContext) {
+    const t = getT(router.path);
     return (
-      <section class="relative container flex flex-col overflow-hidden mx-auto mt-14">
+      <section class="relative container flex flex-col overflow-hidden mx-auto mt-14 px-4 md:px-8">
         <div class="flex-1 flex flex-col items-center justify-center text-center pt-20 pb-4 md:pb-8 lg:pb-12">
           {this.renderHero({})}
         </div>
 
         {this.renderProductList()}
+
+        {this.renderToolings(t)}
+
+        {this.renderProducts(t)}
       </section>
     );
   }

@@ -24,6 +24,44 @@ export const en: Translations = {
   },
   home: {
     subtitle: "a fast-moving, modern tech & venture studio.",
+    toolings: {
+      label: "toolings",
+      title: "The Proprietary Stack",
+      newstack: {
+        tag: "Web Framework",
+        description:
+          "A full-stack framework where server and client code live in the same component class, with no API layer to define or maintain separately. Proxy-based reactivity drives re-renders automatically, static async methods become RPC endpoints at build time, and the bind={} prop wires form inputs to component state at compile time. It supports SSR, SPA, and SSG from the same codebase, with service workers, PWA manifests, and asset fingerprinting handled out of the box. Every product in the studio runs on it, including this website. A direct re-reading of Nullstack rebuilt with only ESBuild and Hono.",
+      },
+      basebox: {
+        tag: "Infrastructure",
+        description:
+          "The internal BaaS that powers everything the studio ships. Every product built on it gets multi-tenant organization management, OAuth and session-based authentication, subscription and payment processing, file storage with CDN delivery, and a set of injectable UI components out of the box. Contabilly, Entregou.ai, Broto and its generated apps all run on it as tenants, sharing the same auth, the same payment rails, and the same storage layer without any of that being re-implemented per project.",
+      },
+      murow: {
+        tag: "Multiplayer Engine",
+        description:
+          "An open-source TypeScript game engine that takes multiplayer seriously from the ground up. The renderer runs on WebGPU and covers both 2D and 3D, with glTF loading, skeletal animation with crossfading, and GPU compute for zero-copy physics. Networking is transport-agnostic and built around binary snapshot delta encoding, client-side prediction, and a type-safe RPC and intent system. It also has an ECS with Structure of Arrays storage and bitmask queries, NavMesh pathfinding with dynamic obstacles, and a deterministic fixed-rate game loop. Every hot path is zero-allocation by design, keeping frame times consistent at any player count.",
+      },
+    },
+    products: {
+      label: "products",
+      title: "Ventures",
+      broto: {
+        tag: "AI",
+        description:
+          "Submit an idea and get a live SaaS with authentication, payments, admin panel, custom back-end, landing page and a production-ready app in under 15 minutes. AI will handle everything up to deployment. And keep 100% of all revenue your app makes.",
+      },
+      entregou: {
+        tag: "Logistics",
+        description:
+          "Create an online shop with no setup, no contract, and no implementation fee. Quick, collaborative, multi-store, with roles, coupons, and payments built in. Presented at WebSummit Rio 2025, where it drew attention from local media and VC investors.",
+      },
+      contabilly: {
+        tag: "Finance",
+        description:
+          "Digital accounting platform for developers working abroad and in Brazil. A dedicated team manages your invoices, payment guides, and tax compliance, with the platform automating what usually is manual back-and-forth with an accountant.",
+      },
+    },
   },
   about: {
     intro: {

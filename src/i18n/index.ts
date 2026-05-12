@@ -25,6 +25,20 @@ export interface Translations {
   };
   home: {
     subtitle: string;
+    toolings: {
+      label: string;
+      title: string;
+      newstack: Product;
+      basebox: Product;
+      murow: Product;
+    };
+    products: {
+      label: string;
+      title: string;
+      broto: Product;
+      entregou: Product;
+      contabilly: Product;
+    };
   };
   about: {
     intro: {
