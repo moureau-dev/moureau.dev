@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "start": "newstack start",
-    "build": "newstack build --mode=ssg"
+    "build": "newstack build --mode=ssg",
+    "predeploy": "bun run build",
+    "deploy": "bun run deploy.ts"
   },
   "dependencies": {
     "@moureau/newstack": "latest",
@@ -13,6 +15,7 @@
     "tailwindcss": "^4"
   },
   "devDependencies": {
+    "@moureau/basebox": "^0.0.31",
     "@types/node": "^25.6.0"
   }
 }
