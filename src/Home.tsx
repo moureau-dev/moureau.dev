@@ -142,7 +142,11 @@ export class Home extends Newstack {
                   {p.tag}
                 </p>
 
-                {p.live ? (
+                {p.id === "broto" ? (
+                  <span class="font-mono text-[10px] px-2.5 py-1 rounded-full border border-amber-500/30 text-amber-400 bg-amber-500/10">
+                    demo
+                  </span>
+                ) : p.live ? (
                   <span class="font-mono text-[10px] px-2.5 py-1 rounded-full border border-emerald-500/30 text-emerald-400 bg-emerald-500/10">
                     live
                   </span>
