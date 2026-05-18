@@ -9,6 +9,7 @@ import { Home } from "./Home";
 import { About } from "./About";
 import { Blog } from "./Blog";
 import { BlogPost } from "./BlogPost";
+import { NotFound } from "./NotFound";
 
 /* ---------- Styles ---------- */
 import "./styles.css";
@@ -49,6 +50,9 @@ export class Application extends Newstack {
         <About route="/es-ES/about" />
         <Blog route="/es-ES/blog" />
         <BlogPost route="/es-ES/blog/:slug" />
+
+        {/* 404 catch-all */}
+        <NotFound route="*" />
       </Layout>
     );
   }
