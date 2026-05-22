@@ -9,13 +9,13 @@
     "deploy": "bun run deploy.ts"
   },
   "dependencies": {
-    "@moureau/newstack": "latest",
+    "@moureau/newstack": "^0.0.76",
     "esbuild-plugin-tailwindcss": "^2",
     "marked": "^18.0.0",
     "tailwindcss": "^4"
   },
   "devDependencies": {
-    "@moureau/basebox": "^0.0.31",
+    "@moureau/basebox": "^0.0.35",
     "@types/node": "^25.6.0"
   }
 }
