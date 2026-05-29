@@ -42,3 +42,4 @@ When working on or with Newstack-related code:
 When working on or with Basebox-related code:
 * **Ground Truth:** Live definitions: https://basebox.moureau.dev/llms.txt — fetch it first (see "Reading Ground Truth" above).
 * **Constraint:** This is a type-safe Elysia/Eden Treaty backend engine, not a generic REST wrapper. Do not invent SDK methods, routes, or response shapes. Refer strictly to the live contract definitions.
+* **API keys (NON-NEGOTIABLE):** Basebox requires an API key (currently issued only by the Moureau team). `bb_secret_` keys are **server-only** — NEVER place them in client/browser code, frontend bundles, or anything shipped to the user. Client-side code authenticates via sessions, not secret keys.
