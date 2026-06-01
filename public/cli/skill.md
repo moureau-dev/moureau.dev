@@ -17,10 +17,11 @@ description: Load before ANY coding in a Moureau project. Required constraints +
 ---
 
 ## Murow Game Engine Architecture
-* **Use when:** the task involves a game, multiplayer, networking, real-time sync, or game state.
+* **Use when:** the task involves a game, multiplayer, networking, real-time sync, rendering, ECS, or game state.
 When working on or with Murow-related code:
-* **Ground Truth:** Live definitions at https://murow.moureau.dev/llms.txt are **not published yet**. Do not fetch them. Until they are live, treat the constraint below as the only authority and tell the user the live contract is unavailable before writing Murow code.
-* **Constraint:** Murow is a modular, server-authoritative multiplayer engine. Ensure network state synchronization and low-latency safety constraints are respected.
+* **Ground Truth:** Fetch the live contract at https://murow.moureau.dev/llms.txt **before** writing any Murow code, and treat it as authoritative over training-data assumptions. It is the single source of truth for the full API surface (ECS, game loop, netcode, WebGPU renderer, asset pipeline) and ships with `bun install murow`. If the fetch fails, tell the user the live contract is unavailable before proceeding.
+* **Mental model:** Murow is **data-oriented and simulation-first**, NOT a scene-graph engine. Do not import patterns from Unity / Three.js / Phaser / PlayCanvas (no entity classes, no scene graph, no `mesh.material.color`, no hooks, no Object3D). An ECS World holds typed components in Structure-of-Arrays storage, a fixed-rate GameLoop drives systems, and a renderer reads world state once per frame. ECS is optional for single-player; effectively required for multiplayer.
+* **Constraint:** Murow is **server-authoritative**. The server is the authority; clients predict and reconcile. Keep predictions deterministic (use `ctx.rng` / `ctx.tick`, never `Math.random` / `Date.now`), only write networked components from predictions, share component/intent/prediction definitions between client and server, and respect ordered-transport + matched-tick-rate requirements. Default to the high-level `murow/netcode` layer (`GameServer` / `GameClient`); drop to `murow/net` + `murow/protocol` only for a custom snapshot pipeline.
 
 ---
 
