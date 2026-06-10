@@ -19,6 +19,7 @@ export class Footer extends Newstack {
             >
               Moureau Development
             </a>
+            {" "}- 59.665.410/0001-02
           </span>
 
           <div class="flex items-center gap-4">
