@@ -5,6 +5,11 @@
   line-height: 1.75;
 }
 
+/* Wider measure for pitch pages */
+.prose-wide {
+  max-width: 100ch;
+}
+
 .prose h1,
 .prose h2,
 .prose h3,
@@ -96,4 +101,9 @@
   max-width: 100%;
   border-radius: 0.5rem;
   margin: 1.5rem 0;
+}
+
+.prose table {
+  width: 100%;
+  text-align: left;
 }
