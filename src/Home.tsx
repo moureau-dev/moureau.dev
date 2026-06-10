@@ -5,6 +5,7 @@ import type { Translations } from "./i18n";
 import { Linkedin } from "./components/icons/Linkedin";
 import { Email } from "./components/icons/Email";
 import { Github } from "./components/icons/Github";
+import { pitches } from "./pitches.config";
 
 /**
  * @description
@@ -255,10 +256,25 @@ export class Home extends Newstack {
     );
   }
 
+  hydrate() {
+    // Remove crawler links after hydration
+    const crawlerLinks = document.querySelectorAll('[data-crawler-only]');
+    crawlerLinks.forEach(link => link.remove());
+  }
+
   render({ router }: NewstackClientContext) {
     const t = getT(router.path);
+    const prefix = router?.path?.startsWith('/es-ES') ? '/es-ES' : '';
+
     return (
       <section class="relative container flex flex-col overflow-hidden mx-auto mt-14 px-4 md:px-8">
+        {/* Hidden links for SSG crawler */}
+        <div style="position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;" aria-hidden="true">
+          {pitches.map((pitch) => (
+            <a href={`${prefix}/pitches/${pitch.id}`} data-crawler-only>{pitch.name} pitch</a>
+          ))}
+        </div>
+
         <div class="flex-1 flex flex-col items-center justify-center text-center pt-20 pb-4 md:pb-8 lg:pb-12">
           {this.renderHero({})}
         </div>

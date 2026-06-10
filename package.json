@@ -4,9 +4,11 @@
   "type": "module",
   "scripts": {
     "start": "newstack start",
+    "prebuild": "bun run copy:pitches",
     "build": "newstack build --mode=ssg",
     "predeploy": "bun run build",
-    "deploy": "bun run deploy.ts"
+    "deploy": "bun run deploy.ts",
+    "copy:pitches": "bun run scripts/copy-pitches.ts"
   },
   "dependencies": {
     "@moureau/newstack": "^0.0.76",

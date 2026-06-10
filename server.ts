@@ -9,7 +9,7 @@ import { Application } from "./src/Application";
 const app = new Application();
 const server = new NewstackServer();
 server.start(app, {
-    deps: { getPost, getPosts },
+    deps: { getPost, getPosts, getPitch },
 });
 
 async function getPosts() {
@@ -27,6 +27,15 @@ async function getPosts() {
 async function getPost({ slug }: { slug: string }) {
     const raw = await readFile(
         join(process.cwd(), `public/posts/${slug}.md`),
+        "utf-8"
+    );
+
+    return raw;
+}
+
+async function getPitch({ product }: { product: string }) {
+    const raw = await readFile(
+        join(process.cwd(), `public/pitches/${product}.md`),
         "utf-8"
     );
 
