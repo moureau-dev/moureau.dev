@@ -99,7 +99,7 @@ export const en: Translations = {
     },
     identity: {
       title: "Strategic Identity",
-      subtitle: "Brazil–Spain Corridor · Curitiba × Madrid",
+      subtitle: "Brazil–Spain Corridor · Rio × Madrid",
       techPurism: {
         label: "Technical Purism",
         description:

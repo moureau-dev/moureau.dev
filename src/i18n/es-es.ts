@@ -99,7 +99,7 @@ export const esEs: Translations = {
     },
     identity: {
       title: "Identidad Estratégica",
-      subtitle: "Corredor Brasil–España · Curitiba × Madrid",
+      subtitle: "Corredor Brasil–España · Rio × Madrid",
       techPurism: {
         label: "Purismo Técnico",
         description:
