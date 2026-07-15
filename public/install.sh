@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-VERSION="0.1.0"
+VERSION="0.2.0"
 INSTALL_DIR="$HOME/.local/bin"
 CLI_NAME="moureau"
+DEVKIT_DIR="$HOME/.moureau"
+DEVKIT_REPO="git@github.com:moureau-dev/devkit.git"
 SKILL_DIR="moureau-dev"
 
 ZSH_COMP="$HOME/.zsh/completions/_moureau"
 BASH_COMP="$HOME/.local/share/bash-completion/completions/moureau"
 
-SKILL_URL="https://moureau.dev/cli/skill.md"
 INSTALLER_URL="https://moureau.dev/install.sh"
 
 # ----------------------------
@@ -31,35 +32,70 @@ cat > "$INSTALL_DIR/$CLI_NAME" <<OUTER
 set -euo pipefail
 
 VERSION="$VERSION"
-SKILL_URL="$SKILL_URL"
-INSTALLER_URL="$INSTALLER_URL"
+DEVKIT_DIR="$DEVKIT_DIR"
+DEVKIT_REPO="$DEVKIT_REPO"
 INSTALL_DIR="$INSTALL_DIR"
 CLI_NAME="$CLI_NAME"
 SKILL_DIR="$SKILL_DIR"
 ZSH_COMP="$ZSH_COMP"
 BASH_COMP="$BASH_COMP"
-SKILL_ENVS=(.claude .agents .config/opencode)
+INSTALLER_URL="$INSTALLER_URL"
+SKILL_ENVS=(.claude .agents .config/opencode .pi/agent)
 
 green_print() { printf "\033[0;32m%s\033[0m\n" "\$1"; }
 blue_print()  { printf "\033[0;34m%s\033[0m\n" "\$1"; }
 red_print()   { printf "\033[0;31m%s\033[0m\n" "\$1"; }
 
 do_sync() {
-  blue_print "[⋯] syncing skills..."
+  blue_print "[⋯] syncing devkit..."
 
-  tmp=\$(mktemp)
-
-  if curl -fsSL "\$SKILL_URL" -o "\$tmp"; then
-    for env in "\${SKILL_ENVS[@]}"; do
-      mkdir -p "\$HOME/\${env}/skills/\$SKILL_DIR"
-      cp "\$tmp" "\$HOME/\${env}/skills/\$SKILL_DIR/SKILL.md"
-    done
-    green_print "[✓] skills synced"
+  if [ -d "\$DEVKIT_DIR" ]; then
+    git -C "\$DEVKIT_DIR" pull --ff-only
   else
-    red_print "[✗] failed to download skills"
+    git clone --depth 1 "\$DEVKIT_REPO" "\$DEVKIT_DIR"
   fi
 
-  rm -f "\$tmp"
+  # --- skills ---
+  for env in "\${SKILL_ENVS[@]}"; do
+    target="\$HOME/\$env/skills/\$SKILL_DIR"
+    mkdir -p "\$target"
+    ln -sf "\$DEVKIT_DIR/skills/\$SKILL_DIR.md" "\$target/SKILL.md"
+  done
+
+  # --- commands (prompt templates for all agents) ---
+  # pi → .pi/agent/prompts  |  claude → .claude/commands  |  opencode → .config/opencode/prompts
+  COMMAND_DIRS=(
+    "\$HOME/.pi/agent/prompts"
+    "\$HOME/.claude/commands"
+    "\$HOME/.config/opencode/prompts"
+  )
+  for target_dir in "\${COMMAND_DIRS[@]}"; do
+    mkdir -p "\$target_dir"
+    for cmd in "\$DEVKIT_DIR"/commands/*.md; do
+      [ -f "\$cmd" ] || continue
+      ln -sf "\$cmd" "\$target_dir/\$(basename "\$cmd")"
+    done
+  done
+
+  # --- tools (synced to all agents) ---
+  TOOL_DIRS=(
+    "\$HOME/.pi/agent/tools"
+    "\$HOME/.claude/tools"
+    "\$HOME/.config/opencode/tools"
+  )
+  for tools_target in "\${TOOL_DIRS[@]}"; do
+    mkdir -p "\$tools_target"
+    for tool_dir in "\$DEVKIT_DIR"/tools/*/; do
+      [ -d "\$tool_dir" ] || continue
+      tool_name=\$(basename "\$tool_dir")
+      target="\$tools_target/\$tool_name"
+      [ -L "\$target" ] && rm -f "\$target"
+      [ -d "\$target" ] && rm -rf "\$target"
+      ln -sf "\$tool_dir" "\$target"
+    done
+  done
+
+  green_print "[✓] skills, commands, and tools synced"
 }
 
 do_update() {
@@ -88,9 +124,26 @@ do_uninstall() {
 
   rm -f "\$INSTALL_DIR/\$CLI_NAME"
 
+  # Only remove moureau-owned files, not the entire agent config directories
   for env in "\${SKILL_ENVS[@]}"; do
-    rm -rf "\$HOME/\${env}/skills/\$SKILL_DIR"
+    rm -rf "\$HOME/\$env/skills/\$SKILL_DIR"
   done
+
+  for prompts_dir in "\$HOME/.pi/agent/prompts" "\$HOME/.claude/commands" "\$HOME/.config/opencode/prompts"; do
+    [ -d "\$prompts_dir" ] || continue
+    for cmd in "\$prompts_dir"/*.md; do
+      [ -L "\$cmd" ] && rm -f "\$cmd"
+    done 2>/dev/null
+  done
+
+  for tools_dir in "\$HOME/.pi/agent/tools" "\$HOME/.claude/tools" "\$HOME/.config/opencode/tools"; do
+    [ -d "\$tools_dir" ] || continue
+    for tool in "\$tools_dir"/*; do
+      [ -L "\$tool" ] && rm -f "\$tool"
+    done 2>/dev/null
+  done
+
+  rm -rf "\$DEVKIT_DIR"
 
   rm -f "\$ZSH_COMP"
   rm -f "\$BASH_COMP"
@@ -111,7 +164,7 @@ do_help() {
   printf "\n"
   printf "moureau v%s\n" "\$VERSION"
   printf "commands:\n"
-  printf "  sync      Sync AI skills\n"
+  printf "  sync      Sync skills, commands, and tools\n"
   printf "  update    Update CLI\n"
   printf "  uninstall Remove CLI\n"
   printf "  version   Show version\n"
