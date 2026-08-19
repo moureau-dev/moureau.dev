@@ -138,7 +138,7 @@ export const esEs: Translations = {
   meet: {
     title: "Conócenos",
     intro:
-      "Construimos productos ágiles y rápidos desde cero — y nos gusta hablar con fundadores y equipos que buscan lo mismo. Elige un horario y seguimos desde ahí.",
+      "Construimos nuestros propios productos y también construimos para clientes. Si tienes algo en mente, hablemos. Elige un horario.",
     button: "Agendar llamada",
     topics: {
       label: "en qué podemos ayudarte",

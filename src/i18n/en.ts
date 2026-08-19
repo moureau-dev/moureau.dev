@@ -139,7 +139,7 @@ export const en: Translations = {
   meet: {
     title: "Meet us",
     intro:
-      "We build lean, fast products from the ground up — and we like talking to founders and teams who want the same. Pick a slot below and we'll take it from there.",
+      "We build our own products and we build for clients too. If you've got something in mind, let's talk. Pick a slot below.",
     button: "Book a call",
     topics: {
       label: "what we can help with",
