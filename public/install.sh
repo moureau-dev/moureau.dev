@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-VERSION="0.2.0"
+VERSION="0.3.0"
 INSTALL_DIR="$HOME/.local/bin"
 CLI_NAME="moureau"
 DEVKIT_DIR="$HOME/.moureau"
@@ -25,9 +25,10 @@ blue_print "[⋯] installing $CLI_NAME..."
 mkdir -p "$INSTALL_DIR"
 
 # ----------------------------
-# INSTALL CLI
+# INSTALL CLI (write to temp, then rename atomically to avoid Text file busy)
 # ----------------------------
-cat > "$INSTALL_DIR/$CLI_NAME" <<OUTER
+TMPFILE="$(mktemp)"
+cat > "$TMPFILE" <<OUTER
 #!/usr/bin/env bash
 set -euo pipefail
 
@@ -50,20 +51,27 @@ do_sync() {
   blue_print "[⋯] syncing devkit..."
 
   if [ -d "\$DEVKIT_DIR" ]; then
-    git -C "\$DEVKIT_DIR" pull --ff-only
-  else
+    blue_print "[⋯] pulling latest devkit..."
+    (cd "\$DEVKIT_DIR" && git stash push -m "moureau sync \$(date +%Y-%m-%d_%H:%M:%S)" --include-untracked 2>/dev/null || true)
+    if ! git -C "\$DEVKIT_DIR" pull --ff-only; then
+      red_print "[✗] git pull failed. Check \$DEVKIT_DIR for conflicts."
+      return 1
+    fi
     git clone --depth 1 "\$DEVKIT_REPO" "\$DEVKIT_DIR"
   fi
 
-  # --- skills ---
+  # Install dependencies so imports resolve
+  blue_print "[⋯] installing devkit dependencies..."
+  (cd "\$DEVKIT_DIR" && bun install --frozen-lockfile 2>/dev/null || bun install)
+
+  # --- skills (symlink) ---
   for env in "\${SKILL_ENVS[@]}"; do
     target="\$HOME/\$env/skills/\$SKILL_DIR"
     mkdir -p "\$target"
     ln -sf "\$DEVKIT_DIR/skills/\$SKILL_DIR.md" "\$target/SKILL.md"
   done
 
-  # --- commands (prompt templates for all agents) ---
-  # pi → .pi/agent/prompts  |  claude → .claude/commands  |  opencode → .config/opencode/prompts
+  # --- commands / prompt templates (symlink) ---
   COMMAND_DIRS=(
     "\$HOME/.pi/agent/prompts"
     "\$HOME/.claude/commands"
@@ -77,7 +85,11 @@ do_sync() {
     done
   done
 
-  # --- tools (synced to all agents) ---
+  # --- tools ---
+  # Symlinks the raw tool dir (tool.ts + tool.json + resources/) into each agent,
+  # then symlinks the adapter .ts files so the agent can discover and load them.
+
+  # --- symlink raw tool dir so tool.ts + tool.json + resources/ are accessible ---
   TOOL_DIRS=(
     "\$HOME/.pi/agent/tools"
     "\$HOME/.claude/tools"
@@ -95,7 +107,24 @@ do_sync() {
     done
   done
 
-  green_print "[✓] skills, commands, and tools synced"
+  # --- tool adapters (import from devkit, so updates flow automatically) ---
+  # Each generated file is just an import + re-export of the devkit's adapter.
+  # No inline logic — run `moureau sync` to refresh after devkit updates.
+
+  # OpenCode: expects flat .ts files in tools/
+  mkdir -p "\$HOME/.config/opencode/tools"
+  ln -sf "\$DEVKIT_DIR/tools/basebox/adapters/opencode.ts" "\$HOME/.config/opencode/tools/basebox.ts"
+
+  # pi: extension file
+  mkdir -p "\$HOME/.pi/agent/extensions"
+  ln -sf "\$DEVKIT_DIR/tools/basebox/adapters/pi.ts" "\$HOME/.pi/agent/extensions/basebox.ts"
+
+  # claude: tool file (imported by claude-code config or MCP)
+  mkdir -p "\$HOME/.claude/tools"
+  ln -sf "\$DEVKIT_DIR/tools/basebox/adapters/claude.ts" "\$HOME/.claude/tools/basebox.ts"
+
+  green_print "[✓] devkit synced (\$DEVKIT_DIR)"
+  green_print "[✓] skills, commands, and tools installed"
 }
 
 do_update() {
@@ -124,7 +153,6 @@ do_uninstall() {
 
   rm -f "\$INSTALL_DIR/\$CLI_NAME"
 
-  # Only remove moureau-owned files, not the entire agent config directories
   for env in "\${SKILL_ENVS[@]}"; do
     rm -rf "\$HOME/\$env/skills/\$SKILL_DIR"
   done
@@ -136,10 +164,16 @@ do_uninstall() {
     done 2>/dev/null
   done
 
+  # Remove adapter symlinks
+  rm -f "\$HOME/.config/opencode/tools/basebox.ts"
+  rm -f "\$HOME/.pi/agent/extensions/basebox.ts"
+  rm -f "\$HOME/.claude/tools/basebox.ts"
+
+  # Remove symlinked tool directories
   for tools_dir in "\$HOME/.pi/agent/tools" "\$HOME/.claude/tools" "\$HOME/.config/opencode/tools"; do
     [ -d "\$tools_dir" ] || continue
-    for tool in "\$tools_dir"/*; do
-      [ -L "\$tool" ] && rm -f "\$tool"
+    for item in "\$tools_dir"/*; do
+      [ -L "\$item" ] && rm -f "\$item"
     done 2>/dev/null
   done
 
@@ -190,7 +224,11 @@ main "\$@"
 exit
 OUTER
 
+# Atomically move into place so running `moureau update` doesn't hit Text file busy
+mv -f "$TMPFILE" "$INSTALL_DIR/$CLI_NAME"
 chmod +x "$INSTALL_DIR/$CLI_NAME"
+
+rm -f "$TMPFILE"
 
 # ----------------------------
 # PATH SETUP
