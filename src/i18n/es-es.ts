@@ -16,6 +16,11 @@ export const esEs: Translations = {
       description:
         "Notas sobre tecnología, arquitectura y construcción desde cero.",
     },
+    meet: {
+      title: "Conócenos — Moureau Development",
+      description:
+        "Agenda una llamada con Moureau Development — elige un horario que te venga bien.",
+    },
   },
   nav: {
     about: "sobre",
@@ -129,5 +134,35 @@ export const esEs: Translations = {
       "Notas sobre construcción desde cero — decisiones de arquitectura, lecciones de la stack y el razonamiento detrás de poseer cada capa.",
     backToBlog: "← blog",
     notFound: "Artículo no encontrado.",
+  },
+  meet: {
+    title: "Conócenos",
+    intro:
+      "Construimos productos ágiles y rápidos desde cero — y nos gusta hablar con fundadores y equipos que buscan lo mismo. Elige un horario y seguimos desde ahí.",
+    button: "Agendar llamada",
+    topics: {
+      label: "en qué podemos ayudarte",
+      architecture: {
+        title: "Arquitectura y AI",
+        tag: "Sistemas",
+        description:
+          "Stacks sin dependencias externas, optimización de bajo nivel y sistemas que siguen siendo rápidos a escala.",
+      },
+      ventures: {
+        title: "Venture building",
+        tag: "Ventures",
+        description:
+          "De la idea a un producto desplegado en tiempo récord. Somos dueños del stack, así que lanzas más rápido.",
+      },
+      multiplayer: {
+        title: "Sistemas realtime",
+        tag: "Tiempo real",
+        description:
+          "Renderizadores, predicción del lado del cliente, netcode. Si tiene que ser en tiempo real, ya lo hemos construido.",
+      },
+    },
+    contact: {
+      label: "o escríbenos directamente",
+    },
   },
 };

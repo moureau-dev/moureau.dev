@@ -16,6 +16,11 @@ export const en: Translations = {
       description:
         "Thoughts on technology, architecture, and building from the ground up.",
     },
+    meet: {
+      title: "Meet — Moureau Development",
+      description:
+        "Schedule a call with Moureau Development — pick a time that works for you.",
+    },
   },
   nav: {
     about: "about",
@@ -130,5 +135,35 @@ export const en: Translations = {
       "Notes on building from the ground up — architecture decisions, lessons from the stack, and the thinking behind owning every layer.",
     backToBlog: "← blog",
     notFound: "Post not found.",
+  },
+  meet: {
+    title: "Meet us",
+    intro:
+      "We build lean, fast products from the ground up — and we like talking to founders and teams who want the same. Pick a slot below and we'll take it from there.",
+    button: "Book a call",
+    topics: {
+      label: "what we can help with",
+      architecture: {
+        title: "Architecture & AI",
+        tag: "Systems",
+        description:
+          "Zero-dependency stacks, low-level optimization, and systems that stay fast at scale.",
+      },
+      ventures: {
+        title: "Venture building",
+        tag: "Ventures",
+        description:
+          "From idea to a deployed product in record time. We own the stack, so you ship faster.",
+      },
+      multiplayer: {
+        title: "Multiplayer systems",
+        tag: "Real-time",
+        description:
+          "WebGPU rendering, client-side prediction, netcode. If it has to be real-time, we've built it before.",
+      },
+    },
+    contact: {
+      label: "or reach us directly",
+    },
   },
 };

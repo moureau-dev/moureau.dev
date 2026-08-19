@@ -12,11 +12,18 @@ interface Pillar {
   description: string;
 }
 
+interface Topic {
+  title: string;
+  tag: string;
+  description: string;
+}
+
 export interface Translations {
   meta: {
     home: { title: string; description: string };
     about: { title: string; description: string };
     blog: { title: string; description: string };
+    meet: { title: string; description: string };
   };
   nav: {
     about: string;
@@ -75,4 +82,18 @@ export interface Translations {
     backToBlog: string;
     notFound: string;
   };
+  meet: {
+    title: string;
+    intro: string;
+    button: string;
+    topics: {
+      label: string;
+      architecture: Topic;
+      ventures: Topic;
+      multiplayer: Topic;
+    };
+    contact: {
+      label: string;
+    };
+  }
 }

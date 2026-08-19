@@ -11,7 +11,7 @@
     "copy:pitches": "bun run scripts/copy-pitches.ts"
   },
   "dependencies": {
-    "@moureau/newstack": "^0.0.76",
+    "@moureau/newstack": "latest",
     "esbuild-plugin-tailwindcss": "^2",
     "marked": "^18.0.0",
     "tailwindcss": "^4"

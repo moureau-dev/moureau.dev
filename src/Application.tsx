@@ -11,6 +11,7 @@ import { Blog } from "./Blog";
 import { BlogPost } from "./BlogPost";
 import { Pitch } from "./Pitch";
 import { NotFound } from "./NotFound";
+import { Meet } from "./Meet";
 
 /* ---------- Styles ---------- */
 import "./styles.css";
@@ -46,6 +47,7 @@ export class Application extends Newstack {
         <Blog route="/blog" />
         <BlogPost route="/blog/:slug" />
         <Pitch route="/pitches/:product" />
+        <Meet route="/meet" />
 
         {/* Spanish */}
         <Home route="/es-ES/" />
@@ -53,6 +55,7 @@ export class Application extends Newstack {
         <Blog route="/es-ES/blog" />
         <BlogPost route="/es-ES/blog/:slug" />
         <Pitch route="/es-ES/pitches/:product" />
+        <Meet route="/es-ES/meet" />
 
         {/* 404 catch-all */}
         <NotFound route="*" />
