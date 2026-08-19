@@ -9,6 +9,7 @@ import { Github } from "./components/icons/Github";
 
 export class Meet extends Newstack {
   lang: Lang = "en";
+  loading = false;
 
   /* ---------- Lifecycle ---------- */
   prepare({ page, router }: NewstackClientContext) {
@@ -39,17 +40,27 @@ export class Meet extends Newstack {
           <button
             type="button"
             data-cta
-            class="group relative order-3 sm:order-2 mt-10 inline-flex items-center justify-center gap-3 font-mono text-lg font-bold bg-[#f9f9f9] text-[#101010] pl-9 pr-7 py-4 rounded-full cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-[0_0_50px_rgba(252,81,166,0.4)] w-full sm:w-fit"
+            disabled={this.loading}
+            class={`group relative order-3 sm:order-2 mt-10 inline-flex items-center justify-center gap-3 font-mono text-lg font-bold bg-[#f9f9f9] text-[#101010] pl-9 pr-7 py-4 rounded-full cursor-pointer overflow-hidden transition-all duration-300 hover:shadow-[0_0_50px_rgba(252,81,166,0.4)] w-full sm:w-fit ${
+              this.loading ? "opacity-70 pointer-events-none" : ""
+            }`}
             onclick={this.goToCalendarLink}
           >
             <span class="cta-spotlight" aria-hidden="true" />
             <span class="relative">{t.meet.button}</span>
-            <span
-              aria-hidden="true"
-              class="relative transition-transform duration-300 group-hover:translate-x-1.5"
-            >
-              →
-            </span>
+            {this.loading ? (
+              <span
+                aria-hidden="true"
+                class="relative w-4 h-4 rounded-full border-2 border-[#101010] border-t-transparent animate-spin"
+              />
+            ) : (
+              <span
+                aria-hidden="true"
+                class="relative transition-transform duration-300 group-hover:translate-x-1.5"
+              >
+                →
+              </span>
+            )}
           </button>
         </section>
       </Intro>
@@ -125,12 +136,21 @@ export class Meet extends Newstack {
     );
   }
 
-  async goToCalendarLink({ settings, router }: Partial<NewstackClientContext>) {
+  async goToCalendarLink({ settings }: Partial<NewstackClientContext>) {
+    if (this.loading) return;
+    this.loading = true;
+
     const link = settings?.calendarLink as string | undefined;
-    if (link) {
-      window.location.href = link;
-    } else {
-      window.location.href = "mailto:hello@moureau.dev";
+    try {
+      if (link) {
+        window.location.href = link;
+      } else {
+        window.location.href = "mailto:hello@moureau.dev";
+      }
+    } finally {
+      setTimeout(() => {
+        this.loading = false;
+      }, 1500);
     }
   }
 
