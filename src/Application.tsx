@@ -9,6 +9,7 @@ import { Home } from "./Home";
 import { About } from "./About";
 import { Blog } from "./Blog";
 import { BlogPost } from "./BlogPost";
+import { Broto } from "./Broto";
 import { Pitch } from "./Pitch";
 import { NotFound } from "./NotFound";
 import { Meet } from "./Meet";
@@ -46,7 +47,8 @@ export class Application extends Newstack {
         <About route="/about" />
         <Blog route="/blog" />
         <BlogPost route="/blog/:slug" />
-        <Pitch route="/pitches/:product" />
+        <Broto route="/pitches/broto" />
+        {/* <Pitch route="/pitches/:product" /> */}
         <Meet route="/meet" />
 
         {/* Spanish */}
@@ -54,7 +56,8 @@ export class Application extends Newstack {
         <About route="/es-ES/about" />
         <Blog route="/es-ES/blog" />
         <BlogPost route="/es-ES/blog/:slug" />
-        <Pitch route="/es-ES/pitches/:product" />
+        <Broto route="/es-ES/pitches/broto" />
+        {/* <Pitch route="/es-ES/pitches/:product" /> */}
         <Meet route="/es-ES/meet" />
 
         {/* 404 catch-all */}

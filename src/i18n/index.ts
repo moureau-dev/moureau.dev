@@ -24,76 +24,35 @@ export interface Translations {
     about: { title: string; description: string };
     blog: { title: string; description: string };
     meet: { title: string; description: string };
+    broto: { title: string; description: string };
   };
   nav: {
     about: string;
     blog: string;
     contact: string;
   };
-  home: {
+  broto: {
+    tag: string;
+    name: string;
     subtitle: string;
-    toolings: {
+    team: {
       label: string;
-      title: string;
-      newstack: Product;
-      basebox: Product;
-      murow: Product;
     };
-    products: {
+    info: {
       label: string;
-      title: string;
-      broto: Product;
-      entregou: Product;
-      contabilly: Product;
-    };
-  };
-  about: {
-    intro: {
-      text1: string;
-      highlight1: string;
-      text2: string;
-      highlight2: string;
-      text3: string;
+      description: string;
       p2: string;
+      p3: string;
     };
-    stack: {
+    cta: {
       title: string;
-      basebox: Product;
-      newstack: Product;
-      murow: Product;
-      broto: Product;
-    };
-    identity: {
-      title: string;
-      subtitle: string;
-      techPurism: Pillar;
-      commercialization: Pillar;
-      consultancy: Pillar;
-    };
-    vision: {
-      title: string;
-      text1: string;
-      highlight: string;
-      text2: string;
-    };
-  };
-  blog: {
-    intro: string;
-    backToBlog: string;
-    notFound: string;
-  };
-  meet: {
-    title: string;
-    intro: string;
-    button: string;
-    topics: {
-      label: string;
-      architecture: Topic;
-      ventures: Topic;
-      multiplayer: Topic;
+      description: string;
+      button: string;
     };
     contact: {
       label: string;
+      description: string;
+      button: string;
     };
-  }
+  };
 }
