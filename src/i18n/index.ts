@@ -35,6 +35,7 @@ export interface Translations {
     tag: string;
     name: string;
     subtitle: string;
+    subtitle2: string;
     team: {
       label: string;
     };

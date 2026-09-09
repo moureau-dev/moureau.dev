@@ -174,16 +174,18 @@ export const esEs: Translations = {
     tag: "De la idea a los ingresos en menos de 10 minutos",
     name: "Broto",
     subtitle:
-      "Describe tu producto. Consigue tu app en vivo con una landing page que rankea en Google, un panel de administracion, un servidor personalizado y soporte para multiples usuarios. Pagos incluidos. Solo ingresa tu IBAN para empezar a recibir pagos. Te quedas con hasta el 100% de los ingresos. Sin codigo. Sin configuracion. En minutos.",
+      "Describe tu producto. Broto construye y lanza todo: un sitio web que rankea en Google, cuentas, pagos, un panel de administracion y tu propio servidor. Sin codigo. Sin configuracion. En minutos.",
+    subtitle2:
+      "Los pagos estan incluidos. Ingresa tu IBAN y empieza a recibir pagos. Te quedas con hasta el 100% de los ingresos de tu app.",
     team: {
       label: "creado por",
     },
     info: {
       label: "sobre broto",
       description:
-        "Broto empezo como una herramienta interna en Moureau Development. Cada vez que necesitabamos lanzar un nuevo SaaS, alguien escribia un especificacion rapida y la herramienta generaba todo. Con el tiempo la hicimos mejor. Mejores landing pages. Mejor SEO. Un panel de administracion solido. Un servidor que escala de verdad. Pagos que simplemente funcionan.",
-      p2: "En algun momento nos dimos cuenta de que esto debia ser un producto. No porque quisieramos venderlo, sino porque la distancia entre tener una idea y probarla en el mundo real no deberia requerir un equipo, un presupuesto y tres meses de desarrollo. Asi que lo abrimos.",
-      p3: "Describe lo que quieras. Broto genera la landing page, la optimiza para buscadores, configura soporte multiusuario con sus propias cuentas, te da un panel de administracion para gestionar todo, conecta Stripe para que aceptes pagos y despliega todo en un dominio real. Configuras tu IBAN una vez y los pagos van directo a tu cuenta. Obtienes un enlace. Lo compartes. Descubres si la idea funciona.",
+        "Broto empezo como una herramienta interna en Moureau Development. Cada vez que necesitabamos lanzar una nueva app, uno de nosotros escribia una descripcion rapida y la herramienta generaba todo. Con el tiempo la hicimos mejor: landing pages mas cuidadas, mas visitas desde Google, un panel sencillo para gestionarlo todo y pagos que simplemente funcionan.",
+      p2: "Broto ahora es un producto. Describe lo que quieras y se encarga del resto. Simplemente no hay nada que configurar.",
+      p3: "Consigues un sitio web que la gente puede encontrar en Google. Cuentas para ti y tus usuarios. Un panel para administradores, incluyendo analiticas que respetan el GDPR. Pagos que llegan directo a tu cuenta con solo proporcionar tu IBAN. Obtienes un enlace. Lo compartes. Descubres si la idea funciona.",
     },
     cta: {
       title: "Prueba la beta abierta",
@@ -193,7 +195,7 @@ export const esEs: Translations = {
     contact: {
       label: "Hablemos de Broto",
       description: "¿Tienes preguntas o quieres adaptar Broto para tu propio caso? Nos encantaria escucharte.",
-      button: "Agendar llamada",
+      button: "Conócenos",
     },
   },
 };

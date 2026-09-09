@@ -175,16 +175,18 @@ export const en: Translations = {
     tag: "From idea to revenue in under 10 minutes",
     name: "Broto",
     subtitle:
-      "Describe your product. Get your app live with a landing page that ranks on Google, an admin panel, a custom server, and support for multiple users. Payments built in. Just enter your IBAN to start getting paid. You keep up to 100% of your app revenue. No code. No setup. In minutes.",
+      "Describe your product. Broto builds and launches the whole thing: a website that ranks on Google, accounts, payments, an admin dashboard, and your own server. No code. No setup. In minutes.",
+    subtitle2:
+      "Payments are built in. Enter your IBAN and start getting paid. You keep up to 100% of your app revenue.",
     team: {
       label: "built by",
     },
     info: {
       label: "about broto",
       description:
-        "Broto started as an internal tool at Moureau Development. Every time we needed to spin up a new SaaS, one of us would write a quick spec and the tool would generate the whole thing. Over time we kept making it better. Better landing pages. Better SEO. A proper admin panel. A server that actually scales. Payments that just work.",
-      p2: "At some point we realized this should be a product. Not because we wanted to sell it, but because the gap between having an idea and testing it in the real world should not require a team, a budget, and three months of runway. So we opened it up.",
-      p3: "Describe what you want. Broto generates the landing page, optimizes it for search engines, sets up multi-user support with its own accounts, gives you an admin panel to manage everything, wires up Stripe so you can accept payments, and deploys everything on a real domain. You configure your IBAN once and payments flow straight to your account. You get a link. You share it. You find out if the idea works.",
+        "Broto started as an internal tool at Moureau Development. Every time we needed to launch a new app, one of us would write a quick description and the tool would build the whole thing. Over time we kept making it better: sharper landing pages, more visitors from Google, an easy dashboard to manage everything, and payments that just work.",
+      p2: "Broto is now a product. Describe what you want, and it takes care of the rest. There is simply nothing to configure.",
+      p3: "You get a website people can find on Google. Accounts for you and your users. A dashboard for administrators, including analytics that respect GDPR. Payments that land straight in your bank by simply providing your IBAN. You get a link. You share it. You find out if the idea works.",
     },
     cta: {
       title: "Try the open beta",
@@ -194,7 +196,7 @@ export const en: Translations = {
     contact: {
       label: "Let's talk about Broto",
       description: "Have questions or want to adapt Broto for your own use case? We'd love to hear from you.",
-      button: "Book a call",
+      button: "Meet with us",
     },
   },
 };

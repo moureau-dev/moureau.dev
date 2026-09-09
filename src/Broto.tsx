@@ -26,7 +26,7 @@ export class Broto extends Newstack {
   renderTeam(t: Translations) {
     const team: TeamMember[] = [
       {
-        name: "Luiz Felipe Moureau",
+        name: "Luiz Moureau",
         role: "Co-founder & CTO",
         img: "/static/images/profiles/luiz.avif",
         linkedin: "https://linkedin.com/in/luizfelipesmoureau",
@@ -42,7 +42,7 @@ export class Broto extends Newstack {
     ];
 
     return (
-      <section class="py-10 md:py-16">
+      <section class="pt-2 md:pt-6 pb-10 md:pb-16">
         <h2 class="font-mono text-xs uppercase tracking-widest text-[#fc51a6] mb-6">
           {t.broto.team.label}
         </h2>
@@ -52,7 +52,7 @@ export class Broto extends Newstack {
               <img
                 src={member.img}
                 alt={member.name}
-                class="size-16 md:size-20 lg:size-32 rounded-xl object-cover shrink-0 bg-[#262626]"
+                class="size-20 lg:size-32 rounded-xl object-cover shrink-0 bg-[#262626]"
               />
               <div class="flex flex-col items-center gap-1 text-center">
                 <p class="font-mono text-sm font-medium text-[#f9f9f9] truncate w-full">
@@ -146,6 +146,9 @@ export class Broto extends Newstack {
           <p class="text-[#adadad] text-base md:text-lg leading-relaxed max-w-xl">
             {t.broto.subtitle}
           </p>
+          <p class="text-[#adadad] text-base md:text-lg leading-relaxed max-w-xl mt-4">
+            {t.broto.subtitle2}
+          </p>
         </section>
 
         {this.renderTeam(t)}
@@ -162,9 +165,12 @@ export class Broto extends Newstack {
           </p>
           <a
             href={`${getPrefix(context.router.path)}/meet`}
-            class="inline-flex items-center justify-center gap-2 font-mono text-sm font-bold border border-[#fc51a6]/40 text-[#fc51a6] px-6 py-3 rounded-full hover:bg-[#fc51a6]/10 hover:border-[#fc51a6] transition-all duration-300"
+            class="group inline-flex items-center justify-center gap-3 font-mono text-lg font-bold border border-[#fc51a6]/40 text-[#fc51a6] pl-9 pr-7 py-4 rounded-full cursor-pointer hover:bg-[#fc51a6]/10 hover:border-[#fc51a6] transition-all duration-300"
           >
-            {t.broto.contact.button} <span class="text-base">→</span>
+            <span>{t.broto.contact.button}</span>
+            <span class="transition-transform duration-300 group-hover:translate-x-1.5">
+              →
+            </span>
           </a>
         </section>
       </div>
